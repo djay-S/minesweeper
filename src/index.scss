@@ -1,0 +1,103 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  margin: 20px;
+  padding: 0;
+  font-family: sans-serif;
+  background: #282c34;
+  color: lavenderblush;
+}
+
+table {
+  td {
+    padding: 10px;
+  }
+}
+
+.clear {
+  display: table;
+  clear: both;
+  margin-right: calc(100% + 400px);
+  content: "";
+}
+
+.game {
+  max-width: 50vw;
+  margin: 0 auto;
+  padding: 20px;
+
+  .game-info {
+    font-size: calc(10px + (80 - 10) * ((100vw - 300px) / (4000 - 300)));
+    margin-bottom: 20px;
+    background: #19a0d9;
+    padding: 7px;
+    text-align: center;
+    color: #fff;
+    min-height: 100px;
+    border-radius: 7px;
+  }
+  .game_status{
+    padding: 20px;
+  }
+  .lost {
+    background: #cb3b3b;
+  }
+
+  .won {
+    background: #42B883;
+  }
+
+  .board {
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cell {
+    position: relative;
+    padding: 0.9vw;
+    font-size: calc(10px + (40 - 10) * ((100vw - 300px) / (1600 - 300)));
+    background: #7b7b7b;
+    border: 1px solid #282c34;
+    height: 5vw;
+    text-align: center;
+    width: 5vw;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .hidden {
+    background: #c47b46;
+  }
+
+  .is-flag, .is-mine {
+    color: #fc543c;
+  }
+}
+.cursor_change{
+  cursor: default;
+  display: inline;
+  padding: 20px;
+}
+.pause_text{
+  margin-top: 10vh;
+}
+.game_controls{
+  display: inline ; 
+}
+// button{
+//   background-color: rgba($color: #000000, $alpha: 0);
+// }
