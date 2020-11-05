@@ -39,7 +39,7 @@ table {
     min-height: 100px;
     border-radius: 7px;
   }
-  .game_status{
+  .game_status {
     padding: 20px;
   }
   .lost {
@@ -47,7 +47,7 @@ table {
   }
 
   .won {
-    background: #42B883;
+    background: #42b883;
   }
 
   .board {
@@ -81,23 +81,25 @@ table {
 
   .hidden {
     background: #c47b46;
+
+    &:hover {
+      background-color: #e6945a;
+    }
   }
 
-  .is-flag, .is-mine {
+  .is-flag,
+  .is-mine {
     color: #fc543c;
   }
 }
-.cursor_change{
+.cursor_change {
   cursor: default;
   display: inline;
   padding: 20px;
 }
-.pause_text{
+.pause_text {
   margin-top: 10vh;
 }
-.game_controls{
-  display: inline ; 
+.game_controls {
+  display: inline;
 }
-// button{
-//   background-color: rgba($color: #000000, $alpha: 0);
-// }
