@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Game from './Game'
+import Tile from './Tile'
 
 export default class Minesweeper extends Component {
     state = {
@@ -17,7 +18,6 @@ export default class Minesweeper extends Component {
     gameSelect = (e) => {
         let row = 0, col = 0, mines = 0
         const level = e.target.name
-        console.log(level)
         if (level === 'levelEasy') {
             row = 5
             col = 5
@@ -65,6 +65,43 @@ export default class Minesweeper extends Component {
         window.location.reload(false)
     }
 
+    handleInputFromChild = (row, col, mines) => {
+        console.log('here', row, col, mines)
+        this.setState({
+            rows: row,
+            columns: col,
+            mines: mines,
+            newGame: true
+        })
+    }
+
+    renderBulletLevels = () => {
+        return (
+            <table>
+                <tbody>
+                    <tr>
+                        <td title='5x5 grid'><input type='radio' name='levelEasy' onChange={this.gameSelect} />Easy </td>
+                        <td title='10x7 grid'><input type='radio' name='levelMedium' onChange={this.gameSelect} />Medium </td>
+                        <td title='10x10 grid'><input type='radio' name='levelHard' onChange={this.gameSelect} />Hard </td>
+                        {/* <td title='custom grid'><input type='radio' name='levelCustom' onChange={this.gameSelect} />Custom </td> */}
+                        {/* coz of the paranthesis{this.renderCustomDataEntries} */}
+                    </tr>
+                </tbody>
+            </table>
+        )
+    }
+
+    renderLevelTiles = () => {
+        return (
+            <div className='container'>
+                <Tile heading={'Easy'} name='levelEasy' selected={false} handleInput={this.handleInputFromChild} />
+                <Tile heading={'Medium'} name='levelMedium' selected={false} handleInput={this.handleInputFromChild} />
+                <Tile heading={'Hard'} name='levelHard' selected={false} handleInput={this.handleInputFromChild} />
+                <Tile heading={'Custom'} name='levelCustom' selected={false} handleInput={this.handleInputFromChild} />
+            </div>
+        )
+    }
+
     render() {
         return (
             <div>
@@ -72,22 +109,13 @@ export default class Minesweeper extends Component {
                     (!this.state.newGame) ?
                         <div>
                             Levels
-                            <br /><br /><table>
-                                <tbody>
-                                    <tr>
-                                        <td title='5x5 grid'><input type='radio' name='levelEasy' onChange={this.gameSelect} />Easy </td>
-                                        <td title='10x7 grid'><input type='radio' name='levelMedium' onChange={this.gameSelect} />Medium </td>
-                                        <td title='10x10 grid'><input type='radio' name='levelHard' onChange={this.gameSelect} />Hard </td>
-                                        {/* <td title='custom grid'><input type='radio' name='levelCustom' onChange={this.gameSelect} />Custom </td> */}
-                                        {/* coz of the paranthesis{this.renderCustomDataEntries} */}
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <br /><br />
+                            {/* {this.renderBulletLevels()} */}
                             <br />
+                            {this.renderLevelTiles()}
                         </div>
                         : null}
-                {(this.state.columns * this.state.rows > 0 && !this.state.newGame) ? <button onClick={this.startGame}>Start Game</button> : null
-                }
+                {/* {(this.state.columns * this.state.rows > 0 && !this.state.newGame) ? <button onClick={this.startGame}>Start Game</button> : null} */}
                 {
                     (this.state.columns * this.state.rows > 0 && this.state.newGame) ?
                         <div>

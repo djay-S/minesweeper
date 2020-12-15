@@ -103,3 +103,34 @@ table {
 .game_controls {
   display: inline;
 }
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tile {
+  background-color: #282c34;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 10px 5px rgb(17, 17, 17);
+  height: auto;
+  flex-basis: 25vw;
+  margin: 0 5vw 2vw ;
+  padding: 10px;
+  padding-bottom: 3%;
+  transition: transform .5s;
+  img {
+    width: 60%;
+    height: auto;
+  }
+  &:hover{
+    transform: scale(1.2);
+    z-index: 1;
+  }
+  button{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    z-index: -1;
+  }
+}

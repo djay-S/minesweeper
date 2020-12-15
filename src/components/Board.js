@@ -5,9 +5,9 @@ import Stopwatch from './Stopwatch'
 export default class Board extends Component {
     state = {
         boardData: this.initBoardData(this.props.height, this.props.width, this.props.totalMines),
-        gameStatus: '',
+        gameStatus: 'active',
         gameTime: -1,
-        stopwatchAction: 'start',
+        stopwatchAction: '',
         mineCount: this.props.totalMines,
     };
 
@@ -203,8 +203,9 @@ export default class Board extends Component {
 
     handleCellClick(x, y) {
         //for the first click
-        if (this.state.gameTime === -1) {
+        if (this.state.gameTime === -1 || this.state.stopwatchAction === '') {
             this.setState({ gameTime: 0 })
+            this.setState({ stopwatchAction: 'active' })
 
         }
 
@@ -297,12 +298,13 @@ export default class Board extends Component {
     }
 
     pauseGame = () => {
-        let game = this.state.gameStatus === 'paused' ? '' : 'paused'
+        let game = this.state.gameStatus === 'paused' ? 'active' : 'paused'
+        this.setState({ stopwatchAction: game })
         this.setState({ gameStatus: game })
     }
 
     render() {
-        let game = this.state.gameStatus === 'You Lost.' ? 'lost' : this.state.gameStatus === 'You Win.' ? 'won' : ''
+        let game = this.state.gameStatus === 'You Lost.' ? 'lost' : this.state.gameStatus === 'You Win.' ? 'won' : 'active'
         let style = { width: 'calc( 5vw * ' + this.props.width }
         let pauseButton = (this.state.gameStatus !== 'paused') ? '⏸️' : '▶️'
         return (
@@ -312,8 +314,8 @@ export default class Board extends Component {
                         <div className='cursor_change' onClick={this.refreshPage}>🔄</div>
                         <div className='cursor_change'>💣: {this.state.mineCount}</div>
                         {(this.state.gameStatus !== 'You Lost.') ? <div className='cursor_change' onClick={this.pauseGame}>{pauseButton}</div> : null}
-                        <div className='game_status'>{(this.state.gameStatus !== 'paused') ? (this.state.gameStatus) : null}</div>
-                        <Stopwatch action={this.state.stopwatchAction} />
+                        <div className='game_status'>{(this.state.gameStatus !== 'paused' && this.state.gameStatus !== 'active') ? (this.state.gameStatus) : null}</div>
+                        <Stopwatch gameState={this.state.stopwatchAction} />
                     </div>
                 </div>
                 <div className='grid' style={style}>
