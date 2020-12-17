@@ -58,7 +58,7 @@
 //         if (!isPaused) {
 //             // setIsActive(true)
 //             setIsPaused(true)
-//             // increment.current = 
+//             // increment.current =
 //             setInterval(() => {
 //                 setTimer((timer) => timer + 1)
 //             }, 1000)
@@ -75,7 +75,7 @@
 
 //     const handleResume = () => {
 //         setIsPaused(true)
-//         // increment.current = 
+//         // increment.current =
 //         setInterval(() => {
 //             setTimer((timer) => timer + 1)
 //         }, 1000)
@@ -135,49 +135,48 @@
 
 // export default Stopwatch;
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
 export default function Stopwatch(props) {
-    const [timer, setTimer] = useState(0)
-    const gameStatus = props.gameState
-    const [gameState, setGameState] = useState(props.gameState)
+  const [timer, setTimer] = useState(0);
+  const gameStatus = props.gameState;
+  const [gameState, setGameState] = useState(props.gameState);
 
-    const getTime = () => {
+  const getTime = () => {
+    let seconds = timer;
+    let minutes = timer % 60;
+    let hours = timer % 3600;
+    let time = hours + ":" + minutes + ":" + seconds;
+    return time;
+  };
 
-        let seconds = timer
-        let minutes = timer % 60
-        let hours = timer % 3600
-        let time = hours + ':' + minutes + ':' + seconds
-        return time
+  var time = 0;
+  const handleStopwatchStart = () => {
+    console.log("gameStatus", gameStatus);
+    if (gameStatus === "active") {
+      console.log("PLAY", time, timer);
+      time = setInterval(() => {
+        setTimer((timer) => timer + 1);
+      }, 1000);
+      // clearInterval(time)
     }
-
-    var time = 0 
-    const handleStopwatchStart = () => {
-        console.log('gameStatus', gameStatus)
-        if (gameStatus === 'active') {
-            console.log('PLAY', time, timer)
-            time = setInterval(() => {
-                setTimer((timer) => timer + 1)
-            }, 1000)
-            // clearInterval(time)
-        }
-        if (gameStatus === 'paused' && gameStatus !=='active') {
-            handleStopwatchPause()
-        }
+    if (gameStatus === "paused" && gameStatus !== "active") {
+      handleStopwatchPause();
     }
-    
-    const handleStopwatchPause = () => {
-        console.log('PAUSE', timer)
-        
-        clearInterval(time)
-}
+  };
 
-// useEffect(() => { handleStopwatchStart() }, [gameStatus])
+  const handleStopwatchPause = () => {
+    console.log("PAUSE", timer);
 
-return (
-    <div className='stopwatch'>
-        clock:{timer}
-        {handleStopwatchStart()}
+    clearInterval(time);
+  };
+
+  // useEffect(() => { handleStopwatchStart() }, [gameStatus])
+
+  return (
+    <div className="stopwatch">
+      clock:{timer}
+      {handleStopwatchStart()}
     </div>
-)
+  );
 }
