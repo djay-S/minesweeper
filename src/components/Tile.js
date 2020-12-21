@@ -48,7 +48,6 @@ export default class Tile extends Component {
   };
 
   onInputChange = () => {
-    console.log(this.state.rows, this.state.columns, this.state.mines);
     this.props.handleInput(
       this.state.rows,
       this.state.columns,

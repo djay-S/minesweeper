@@ -15,10 +15,9 @@ export default class Board extends Component {
     mineCount: this.props.totalMines,
   };
 
-  // get mines
+  // spread mines
   getMines(data) {
     let mineArray = [];
-
     data.map((datarow) => {
       datarow.map((dataitem) => {
         if (dataitem.isMine) {
@@ -26,14 +25,12 @@ export default class Board extends Component {
         }
       });
     });
-
     return mineArray;
   }
 
   // get Flags
   getFlags(data) {
     let mineArray = [];
-
     data.map((datarow) => {
       datarow.map((dataitem) => {
         if (dataitem.isFlagged) {
@@ -41,14 +38,12 @@ export default class Board extends Component {
         }
       });
     });
-
     return mineArray;
   }
 
   // get Hidden cells
   getHidden(data) {
     let mineArray = [];
-
     data.map((datarow) => {
       datarow.map((dataitem) => {
         if (!dataitem.isRevealed) {
@@ -56,11 +51,10 @@ export default class Board extends Component {
         }
       });
     });
-
     return mineArray;
   }
 
-  // Initialize the  board
+  // Initialize the grid
   initBoardData(height, width, totalMines) {
     let data = this.createEmptyArray(height, width);
     data = this.plantMines(data, height, width, totalMines);
@@ -70,7 +64,6 @@ export default class Board extends Component {
 
   createEmptyArray(height, width) {
     let data = [];
-
     for (let i = 0; i < height; i++) {
       data.push([]);
       for (let j = 0; j < width; j++) {
@@ -88,7 +81,7 @@ export default class Board extends Component {
     return data;
   }
 
-  // plant mines on the board
+  // plant mines on the grid
   plantMines(data, height, width, totalMines) {
     let randomx,
       randomy,
@@ -101,15 +94,12 @@ export default class Board extends Component {
         minesPlanted++;
       }
     }
-
     return data;
   }
 
-  // get number of neighbouring mines for each board cell
+  // get number of neighbouring mines cell
   getNeighbours(data, height, width) {
-    let updatedData = data,
-      index = 0;
-
+    let updatedData = data;
     for (let i = 0; i < height; i++) {
       for (let j = 0; j < width; j++) {
         if (!data[i][j].isMine) {
@@ -131,7 +121,7 @@ export default class Board extends Component {
     return updatedData;
   }
 
-  // looks for neighbouring cells and returns them
+  // traverse the grid
   traverseBoard(x, y, data) {
     const el = [];
 
@@ -174,11 +164,10 @@ export default class Board extends Component {
     if (x < this.props.height - 1 && y > 0) {
       el.push(data[x + 1][y - 1]);
     }
-
     return el;
   }
 
-  // reveals the whole board
+  // reveal the whole grid
   revealBoard() {
     let updatedData = this.state.boardData;
     updatedData.map((datarow) => {
@@ -191,7 +180,7 @@ export default class Board extends Component {
     });
   }
 
-  /* reveal logic for empty cell */
+  // reveal empty cells
   revealEmpty(x, y, data) {
     let area = this.traverseBoard(x, y, data);
     area.map((value) => {
@@ -208,8 +197,6 @@ export default class Board extends Component {
     });
     return data;
   }
-
-  // Handle User Events
 
   handleCellClick(x, y) {
     //for the first click
@@ -257,7 +244,6 @@ export default class Board extends Component {
     let updatedData = this.state.boardData;
     let mines = this.state.mineCount;
 
-    // check if already revealed
     if (updatedData[x][y].isRevealed) return;
 
     if (updatedData[x][y].isFlagged) {
@@ -296,7 +282,6 @@ export default class Board extends Component {
               cMenu={(e) => this.handleContextMenu(e, dataitem.x, dataitem.y)}
               cellValue={dataitem}
             />
-            {/* {(datarow[datarow.length - 1] === dataitem) ? <div className='clear' /> : ''} */}
           </div>
         );
       });

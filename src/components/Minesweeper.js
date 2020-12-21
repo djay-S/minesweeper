@@ -11,10 +11,6 @@ export default class Minesweeper extends Component {
     customSelected: false,
   };
 
-  startGame = () => {
-    this.setState({ newGame: true });
-  };
-
   gameSelect = (e) => {
     let row = 0,
       col = 0,
@@ -79,35 +75,6 @@ export default class Minesweeper extends Component {
     }, 50);
   };
 
-  renderBulletLevels = () => {
-    return (
-      <table>
-        <tbody>
-          <tr>
-            <td title="5x5 grid">
-              <input type="radio" name="levelEasy" onChange={this.gameSelect} />
-              Easy{" "}
-            </td>
-            <td title="10x7 grid">
-              <input
-                type="radio"
-                name="levelMedium"
-                onChange={this.gameSelect}
-              />
-              Medium{" "}
-            </td>
-            <td title="10x10 grid">
-              <input type="radio" name="levelHard" onChange={this.gameSelect} />
-              Hard{" "}
-            </td>
-            {/* <td title='custom grid'><input type='radio' name='levelCustom' onChange={this.gameSelect} />Custom </td> */}
-            {/* coz of the paranthesis{this.renderCustomDataEntries} */}
-          </tr>
-        </tbody>
-      </table>
-    );
-  };
-
   renderLevelTiles = () => {
     return (
       <div className="container">
@@ -148,15 +115,12 @@ export default class Minesweeper extends Component {
             <h2>Levels</h2>
             <br />
             <br />
-            {/* {this.renderBulletLevels()} */}
             <br />
             {this.renderLevelTiles()}
           </div>
         ) : null}
-        {/* {(this.state.columns * this.state.rows > 0 && !this.state.newGame) ? <button onClick={this.startGame}>Start Game</button> : null} */}
         {this.state.columns * this.state.rows > 0 && this.state.newGame ? (
           <div>
-            {/* <button onClick={this.refreshPage}>New Game</button> */}
             <Game
               height={this.state.rows}
               width={this.state.columns}

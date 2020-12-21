@@ -4,6 +4,7 @@
 *:after {
   box-sizing: border-box;
 }
+
 body {
   margin: 20px;
   padding: 0;
@@ -30,7 +31,6 @@ table {
   margin: 0 auto;
   padding: 20px;
   animation: fadein 1s;
-
   .game-info {
     font-size: calc(10px + (80 - 10) * ((100vw - 300px) / (4000 - 300)));
     margin-bottom: 20px;
@@ -50,9 +50,6 @@ table {
 
   .won {
     background: #006400;
-  }
-
-  .board {
   }
 
   .grid {
@@ -83,7 +80,6 @@ table {
 
   .hidden {
     background: #c47b46;
-
     &:hover {
       background-color: #e6945a;
     }
@@ -109,17 +105,21 @@ table {
   display: inline;
   padding: 20px;
 }
+
 .pause_text {
   margin-top: 10vh;
 }
+
 .game_controls {
   display: inline;
 }
+
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .tile {
   background-color: #282c34;
   border: 1px solid black;
@@ -141,7 +141,6 @@ table {
   }
   &:active {
     animation: magnify 2s infinite linear;
-    // transform: scale(5);
     opacity: 0;
   }
   button {
