@@ -59,7 +59,7 @@ export default class Tile extends Component {
   render() {
     return (
       <span className="tile">
-        {this.props.heading}
+        <h2>{this.props.heading}</h2>
         <button name={this.props.name} onClick={this.gameSelected}>
           <br />
           <br />

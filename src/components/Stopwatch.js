@@ -46,7 +46,8 @@ export default class Stopwatch extends Component {
   render() {
     return (
       <div>
-        Stopwatch ⌚⏳⌛⏲️⏱️ {this.formatTime()}
+        {/* Stopwatch ⌚⏳⌛⏲️ */}
+        ⏱️ {this.formatTime()}
         {this.handleGameTimer()}
       </div>
     );

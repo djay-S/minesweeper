@@ -227,10 +227,9 @@ export default class Board extends Component {
 
     // check if clicked on mine. game over if true
     if (this.state.boardData[x][y].isMine) {
-      this.setState({ gameStatus: "You Lost." });
+      this.setState({ gameStatus: "You Stepped on a Mine.  ⚰️" });
       this.setState({ stopwatchAction: "stop" });
       this.revealBoard();
-      // alert('game over');
     }
 
     let updatedData = this.state.boardData;
@@ -242,10 +241,9 @@ export default class Board extends Component {
     }
 
     if (this.getHidden(updatedData).length === this.props.totalMines) {
-      this.setState({ mineCount: 0, gameStatus: "You Win." });
+      this.setState({ mineCount: 0, gameStatus: "Mines Cleared. 🏆😎" });
       this.setState({ stopwatchAction: "stop" });
       this.revealBoard();
-      // alert('You Win');
     }
 
     this.setState({
@@ -276,10 +274,9 @@ export default class Board extends Component {
       const mineArray = this.getMines(updatedData);
       const flagArray = this.getFlags(updatedData);
       if (JSON.stringify(mineArray) === JSON.stringify(flagArray)) {
-        this.setState({ mineCount: 0, gameStatus: "You Win." });
+        this.setState({ mineCount: 0, gameStatus: "Mines Cleared. 🏆😎" });
         this.setState({ stopwatchAction: "stop" });
         this.revealBoard();
-        // alert('You Win');
       }
     }
 
@@ -318,9 +315,9 @@ export default class Board extends Component {
 
   render() {
     let game =
-      this.state.gameStatus === "You Lost."
+      this.state.gameStatus === "You Stepped on a Mine.  ⚰️"
         ? "lost"
-        : this.state.gameStatus === "You Win."
+        : this.state.gameStatus === "Mines Cleared. 🏆😎"
         ? "won"
         : "active";
     let style = { width: "calc( 5vw * " + this.props.width };
@@ -333,7 +330,7 @@ export default class Board extends Component {
               🔄
             </div>
             <div className="cursor_change">💣: {this.state.mineCount}</div>
-            {this.state.gameStatus !== "You Lost." ? (
+            {this.state.gameStatus !== "You Stepped on a Mine.  ⚰️" ? (
               <div className="cursor_change" onClick={this.pauseGame}>
                 {pauseButton}
               </div>
@@ -342,7 +339,7 @@ export default class Board extends Component {
               {this.state.gameStatus !== "paused" &&
               this.state.gameStatus !== "active"
                 ? this.state.gameStatus
-                : '\u00A0'}
+                : "\u00A0"}
             </div>
             <Stopwatch gameState={this.state.stopwatchAction} />
           </div>
