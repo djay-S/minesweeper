@@ -241,7 +241,7 @@ export default class Board extends Component {
     }
 
     if (this.getHidden(updatedData).length === this.props.totalMines) {
-      this.setState({ mineCount: 0, gameStatus: "Mines Cleared. 🏆😎" });
+      this.setState({ mineCount: 0, gameStatus: "All Mines Cleared. 🏆😎" });
       this.setState({ stopwatchAction: "stop" });
       this.revealBoard();
     }
@@ -274,7 +274,7 @@ export default class Board extends Component {
       const mineArray = this.getMines(updatedData);
       const flagArray = this.getFlags(updatedData);
       if (JSON.stringify(mineArray) === JSON.stringify(flagArray)) {
-        this.setState({ mineCount: 0, gameStatus: "Mines Cleared. 🏆😎" });
+        this.setState({ mineCount: 0, gameStatus: "All Mines Cleared. 🏆😎" });
         this.setState({ stopwatchAction: "stop" });
         this.revealBoard();
       }
@@ -317,7 +317,7 @@ export default class Board extends Component {
     let game =
       this.state.gameStatus === "You Stepped on a Mine.  ⚰️"
         ? "lost"
-        : this.state.gameStatus === "Mines Cleared. 🏆😎"
+        : this.state.gameStatus === "All Mines Cleared. 🏆😎"
         ? "won"
         : "active";
     let style = { width: "calc( 5vw * " + this.props.width };
