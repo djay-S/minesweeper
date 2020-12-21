@@ -60,8 +60,6 @@ export default class Tile extends Component {
       <span className="tile">
         <h2>{this.props.heading}</h2>
         <button name={this.props.name} onClick={this.gameSelected}>
-          <br />
-          <br />
           <img
             src="http://bgfons.com/uploads/tile/tile_texture3062.jpg"
             alt={this.props.name}

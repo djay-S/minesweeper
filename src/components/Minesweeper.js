@@ -112,10 +112,6 @@ export default class Minesweeper extends Component {
         {!this.state.newGame ? (
           <div>
             <h1>Minesweeper</h1>
-            <h2>Levels</h2>
-            <br />
-            <br />
-            <br />
             {this.renderLevelTiles()}
           </div>
         ) : null}
