@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
+
 body {
   margin: 20px;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Indie Flower', cursive;
   background: #282c34;
   color: lavenderblush;
 }
@@ -28,7 +30,7 @@ table {
   max-width: 50vw;
   margin: 0 auto;
   padding: 20px;
-
+  animation: fadein 1s;
   .game-info {
     font-size: calc(10px + (80 - 10) * ((100vw - 300px) / (4000 - 300)));
     margin-bottom: 20px;
@@ -47,10 +49,7 @@ table {
   }
 
   .won {
-    background: #42b883;
-  }
-
-  .board {
+    background: #006400;
   }
 
   .grid {
@@ -81,7 +80,6 @@ table {
 
   .hidden {
     background: #c47b46;
-
     &:hover {
       background-color: #e6945a;
     }
@@ -92,14 +90,71 @@ table {
     color: #fc543c;
   }
 }
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .cursor_change {
   cursor: default;
   display: inline;
   padding: 20px;
 }
+
 .pause_text {
   margin-top: 10vh;
 }
+
 .game_controls {
   display: inline;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tile {
+  background-color: #282c34;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 10px 5px rgb(17, 17, 17);
+  height: auto;
+  flex-basis: 25vw;
+  margin: 0 5vw 2vw;
+  padding: 10px;
+  padding-bottom: 3%;
+  transition: transform 0.5s, opacity 0.5s;
+  img {
+    width: 60%;
+    height: auto;
+  }
+  &:hover {
+    transform: scale(1.2);
+    z-index: 1;
+  }
+  &:active {
+    animation: magnify 2s infinite linear;
+    opacity: 0;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+}
+
+@keyframes magnify {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(5);
+  }
 }
