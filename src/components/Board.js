@@ -342,7 +342,7 @@ export default class Board extends Component {
               {this.state.gameStatus !== "paused" &&
               this.state.gameStatus !== "active"
                 ? this.state.gameStatus
-                : null}
+                : '\u00A0'}
             </div>
             <Stopwatch gameState={this.state.stopwatchAction} />
           </div>
