@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Game from "./Game";
 import Tile from "./Tile";
+import Help from "../view/Help";
 
 export default class Minesweeper extends Component {
   state = {
@@ -9,6 +10,7 @@ export default class Minesweeper extends Component {
     mines: 0,
     newGame: false,
     customSelected: false,
+    showModal: false,
   };
 
   gameSelect = (e) => {
@@ -63,7 +65,7 @@ export default class Minesweeper extends Component {
     window.location.reload(false);
   };
 
-  handleInputFromChild = (row, col, mines) => {
+  handleInputFromTile = (row, col, mines) => {
     console.log("here", row, col, mines);
     setTimeout(() => {
       this.setState({
@@ -82,36 +84,56 @@ export default class Minesweeper extends Component {
           heading={"Easy"}
           name="levelEasy"
           selected={false}
-          handleInput={this.handleInputFromChild}
+          handleInput={this.handleInputFromTile}
         />
         <Tile
           heading={"Medium"}
           name="levelMedium"
           selected={false}
-          handleInput={this.handleInputFromChild}
+          handleInput={this.handleInputFromTile}
         />
         <Tile
           heading={"Hard"}
           name="levelHard"
           selected={false}
-          handleInput={this.handleInputFromChild}
+          handleInput={this.handleInputFromTile}
         />
         <Tile
           heading={"Custom"}
           name="levelCustom"
           selected={false}
-          handleInput={this.handleInputFromChild}
+          handleInput={this.handleInputFromTile}
         />
       </div>
     );
   };
 
+  toggleShowModal = () => {
+    this.setState({ showModal: !this.state.showModal });
+  };
+
+  handleInputFromHelp = (isActive) => {
+    this.setState({ showModal: isActive });
+  };
+
   render() {
+    let fadeClass = this.state.showModal ? "" : "fade-out";
     return (
-      <div>
+      <div className={fadeClass}>
         {!this.state.newGame ? (
           <div>
-            <h1>Minesweeper</h1>
+            <h1>
+              Minesweeper
+              <div className="help-button" onClick={this.toggleShowModal}>
+                ℹ️
+              </div>
+            </h1>
+            {this.state.showModal ? (
+              <Help
+                isActive={this.state.showModal}
+                toggleClose={this.handleInputFromHelp}
+              />
+            ) : null}
             {this.renderLevelTiles()}
           </div>
         ) : null}

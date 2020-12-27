@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import levelHard from "../assets/levelHard.png";
+import levelEasy from "../assets/levelEasy.png";
+import levelMedium from "../assets/levelMedium.png";
+import levelCustom from "../assets/levelCustom.png";
 
 export default class Tile extends Component {
   constructor(props) {
@@ -55,17 +59,25 @@ export default class Tile extends Component {
     );
   };
 
+  getImagePath = () => {
+    const level = this.props.name;
+    if (level === "levelEasy") return levelEasy;
+    if (level === "levelMedium") return levelMedium;
+    if (level === "levelHard") return levelHard;
+    if (level === "levelCustom") return levelCustom;
+  };
+
   render() {
     return (
-      <span className="tile">
+      <div className="tile" onClick={this.gameSelected}>
         <h2>{this.props.heading}</h2>
-        <button name={this.props.name} onClick={this.gameSelected}>
-          <img
-            src="http://bgfons.com/uploads/tile/tile_texture3062.jpg"
-            alt={this.props.name}
-          />
-        </button>
-      </span>
+
+        <img
+          src={this.getImagePath()}
+          // src="http://bgfons.com/uploads/tile/tile_texture3062.jpg"
+          alt={this.props.name}
+        />
+      </div>
     );
   }
 }

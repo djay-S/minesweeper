@@ -1,0 +1,35 @@
+.fade-in {
+  animation: fadein 0.5s;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(20px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 80px;
+  .modal-content {
+    opacity: 0.9;
+    border: 1px solid black;
+    background-color: #282c34;
+    width: 80%;
+    text-align: left;
+    padding: 10px;
+    box-shadow: 15px 15px 15px black;
+  }
+  .close {
+    position: absolute;
+    top: 55px;
+    right: 10%;
+    cursor: default;
+    transition: transform 0.2s;
+    // animation: fadeout 1s;
+    &:hover {
+      transform: scale(1.2) rotate(90deg) translateY(2px);
+    }
+  }
+}
