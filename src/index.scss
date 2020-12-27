@@ -140,6 +140,7 @@ table {
   padding: 10px;
   padding-bottom: 3%;
   transition: transform 0.5s, opacity 0.5s;
+  transition-timing-function: ease-out;
   img {
     width: 55%;
     height: auto;
