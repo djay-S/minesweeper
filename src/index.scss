@@ -47,18 +47,15 @@ table {
   .lost {
     background: #cb3b3b;
   }
-
   .won {
     background: #006400;
   }
-
   .grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
   }
-
   .cell {
     position: relative;
     padding: 0.9vw;
@@ -72,19 +69,16 @@ table {
     border-radius: 5px;
     color: #fff;
     font-weight: 600;
-
     &:focus {
       outline: none;
     }
   }
-
   .hidden {
     background: #c47b46;
     &:hover {
       background-color: #e6945a;
     }
   }
-
   .is-flag,
   .is-mine {
     color: #fc543c;
@@ -97,6 +91,15 @@ table {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -115,6 +118,10 @@ table {
   display: inline;
 }
 
+.fade-out {
+  animation: fadein 0.5s;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -122,10 +129,11 @@ table {
 }
 
 .tile {
+  min-width: 100px;
+  max-height: 40vh;
   background-color: #282c34;
   border: 1px solid black;
   border-radius: 5px;
-  box-shadow: 5px 10px 5px rgb(17, 17, 17);
   height: auto;
   flex-basis: 25vw;
   margin: 0 5vw 2vw;
@@ -133,28 +141,25 @@ table {
   padding-bottom: 3%;
   transition: transform 0.5s, opacity 0.5s;
   img {
-    width: 60%;
+    width: 55%;
     height: auto;
   }
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.01);
+    box-shadow: 5px 10px 5px rgb(17, 17, 17);
     z-index: 1;
   }
   &:active {
-    animation: magnify 2s infinite linear;
+    animation: magnify 2s linear, fadeout 2s linear;
     opacity: 0;
-  }
-  button {
-    background-color: transparent;
-    border: none;
-    outline: none;
   }
 }
 
 .help-button {
-  float: right;
-  margin-right: 20%;
-  margin-left: -25%;
+  font-size: large;
+  position: absolute;
+  top: 25px;
+  right: 20%;
 }
 
 @keyframes magnify {
