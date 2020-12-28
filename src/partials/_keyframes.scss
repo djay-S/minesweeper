@@ -1,0 +1,30 @@
+@keyframes animateOpacity {
+  0% {
+    opacity: (var(--startOpacity));
+  }
+  100% {
+    opacity: (var(--endOpacity));
+  }
+}
+
+@keyframes magnify {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(5);
+  }
+}
+
+@keyframes rollup {
+  0% {
+    bottom: -20%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    bottom: 30%;
+  }
+}

@@ -1,5 +1,9 @@
+@import "../../partials/keyframes";
+
 .fade-in {
-  animation: fadein 0.5s;
+  --startOpacity: 0;
+  --endOpacity: 1;
+  animation: animateOpacity 0.5s;
 }
 
 .modal {
@@ -27,7 +31,6 @@
     right: 10%;
     cursor: default;
     transition: transform 0.2s;
-    // animation: fadeout 1s;
     &:hover {
       transform: scale(1.2) rotate(90deg) translateY(2px);
     }
