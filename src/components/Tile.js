@@ -38,7 +38,7 @@ export default class Tile extends Component {
     if (level === "levelExtreme") {
       row = 10;
       col = 10;
-      mines = 50;
+      mines = 35;
     }
     this.setState(
       {
@@ -83,7 +83,7 @@ export default class Tile extends Component {
     if (level === "levelExtreme") {
       row = 10;
       col = 10;
-      mines = 50;
+      mines = 35;
     }
     return (
       <h2>
