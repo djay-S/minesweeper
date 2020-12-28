@@ -4,7 +4,7 @@ import Stopwatch from "./Stopwatch";
 
 export default class Board extends Component {
   state = {
-    boardData: this.initBoardData(
+    boardData: this.initialiseBoard(
       this.props.height,
       this.props.width,
       this.props.totalMines
@@ -17,45 +17,45 @@ export default class Board extends Component {
 
   // spread mines
   getMines(data) {
-    let mineArray = [];
-    data.map((datarow) => {
-      datarow.map((dataitem) => {
-        if (dataitem.isMine) {
-          mineArray.push(dataitem);
+    let minesArray = [];
+    data.map((rowdata) => {
+      rowdata.map((dataElement) => {
+        if (dataElement.isMine) {
+          minesArray.push(dataElement);
         }
       });
     });
-    return mineArray;
+    return minesArray;
   }
 
   // get Flags
   getFlags(data) {
-    let mineArray = [];
-    data.map((datarow) => {
-      datarow.map((dataitem) => {
-        if (dataitem.isFlagged) {
-          mineArray.push(dataitem);
+    let minesArray = [];
+    data.map((rowdata) => {
+      rowdata.map((dataElement) => {
+        if (dataElement.isFlagged) {
+          minesArray.push(dataElement);
         }
       });
     });
-    return mineArray;
+    return minesArray;
   }
 
   // get Hidden cells
   getHidden(data) {
-    let mineArray = [];
-    data.map((datarow) => {
-      datarow.map((dataitem) => {
-        if (!dataitem.isRevealed) {
-          mineArray.push(dataitem);
+    let minesArray = [];
+    data.map((rowdata) => {
+      rowdata.map((dataElement) => {
+        if (!dataElement.isRevealed) {
+          minesArray.push(dataElement);
         }
       });
     });
-    return mineArray;
+    return minesArray;
   }
 
   // Initialize the grid
-  initBoardData(height, width, totalMines) {
+  initialiseBoard(height, width, totalMines) {
     let data = this.createEmptyArray(height, width);
     data = this.plantMines(data, height, width, totalMines);
     data = this.getNeighbours(data, height, width);
@@ -123,56 +123,57 @@ export default class Board extends Component {
 
   // traverse the grid
   traverseBoard(x, y, data) {
-    const el = [];
+    const ele = [];
 
-    //up
+    //TT
     if (x > 0) {
-      el.push(data[x - 1][y]);
+      ele.push(data[x - 1][y]);
     }
 
-    //down
-    if (x < this.props.height - 1) {
-      el.push(data[x + 1][y]);
-    }
-
-    //left
-    if (y > 0) {
-      el.push(data[x][y - 1]);
-    }
-
-    //right
-    if (y < this.props.width - 1) {
-      el.push(data[x][y + 1]);
-    }
-
-    // top left
-    if (x > 0 && y > 0) {
-      el.push(data[x - 1][y - 1]);
-    }
-
-    // top right
+    // TR
     if (x > 0 && y < this.props.width - 1) {
-      el.push(data[x - 1][y + 1]);
+      ele.push(data[x - 1][y + 1]);
     }
 
-    // bottom right
+    //RR
+    if (y < this.props.width - 1) {
+      ele.push(data[x][y + 1]);
+    }
+
+    // BR
     if (x < this.props.height - 1 && y < this.props.width - 1) {
-      el.push(data[x + 1][y + 1]);
+      ele.push(data[x + 1][y + 1]);
     }
 
-    // bottom left
-    if (x < this.props.height - 1 && y > 0) {
-      el.push(data[x + 1][y - 1]);
+    //BB
+    if (x < this.props.height - 1) {
+      ele.push(data[x + 1][y]);
     }
-    return el;
+
+    // BL
+    if (x < this.props.height - 1 && y > 0) {
+      ele.push(data[x + 1][y - 1]);
+    }
+
+    //LL
+    if (y > 0) {
+      ele.push(data[x][y - 1]);
+    }
+    
+    // TL
+    if (x > 0 && y > 0) {
+      ele.push(data[x - 1][y - 1]);
+    }
+
+    return ele;
   }
 
   // reveal the whole grid
   revealBoard() {
     let updatedData = this.state.boardData;
-    updatedData.map((datarow) => {
-      datarow.map((dataitem) => {
-        dataitem.isRevealed = true;
+    updatedData.map((rowdata) => {
+      rowdata.map((dataElement) => {
+        dataElement.isRevealed = true;
       });
     });
     this.setState({
@@ -257,9 +258,9 @@ export default class Board extends Component {
     }
 
     if (mines === 0) {
-      const mineArray = this.getMines(updatedData);
+      const minesArray = this.getMines(updatedData);
       const flagArray = this.getFlags(updatedData);
-      if (JSON.stringify(mineArray) === JSON.stringify(flagArray)) {
+      if (JSON.stringify(minesArray) === JSON.stringify(flagArray)) {
         this.setState({ mineCount: 0, gameStatus: "All Mines Cleared. 🏆😎" });
         this.setState({ stopwatchAction: "stop" });
         this.revealBoard();
@@ -273,14 +274,14 @@ export default class Board extends Component {
   }
 
   renderBoard(data) {
-    return data.map((datarow) => {
-      return datarow.map((dataitem) => {
+    return data.map((rowdata) => {
+      return rowdata.map((dataElement) => {
         return (
-          <div key={dataitem.x * datarow.length + dataitem.y}>
+          <div key={dataElement.x * rowdata.length + dataElement.y}>
             <Cell
-              onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
-              cMenu={(e) => this.handleContextMenu(e, dataitem.x, dataitem.y)}
-              cellValue={dataitem}
+              onClick={() => this.handleCellClick(dataElement.x, dataElement.y)}
+              cMenu={(e) => this.handleContextMenu(e, dataElement.x, dataElement.y)}
+              cellValue={dataElement}
             />
           </div>
         );

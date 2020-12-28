@@ -38,7 +38,7 @@ export default class Tile extends Component {
     if (level === "levelExtreme") {
       row = 10;
       col = 10;
-      mines = 50;
+      mines = 35;
     }
     this.setState(
       {
@@ -60,6 +60,39 @@ export default class Tile extends Component {
     );
   };
 
+  getLevelDesc = () => {
+    const level = this.props.name;
+    let row = 0,
+      col = 0,
+      mines = 0;
+    if (level === "levelEasy") {
+      row = 5;
+      col = 5;
+      mines = 5;
+    }
+    if (level === "levelMedium") {
+      row = 10;
+      col = 7;
+      mines = 20;
+    }
+    if (level === "levelHard") {
+      row = 10;
+      col = 9;
+      mines = 25;
+    }
+    if (level === "levelExtreme") {
+      row = 10;
+      col = 10;
+      mines = 35;
+    }
+    return (
+      <h2>
+        Grid: {row} x {col}<br/>
+        Mines: {mines}
+      </h2>
+    );
+  };
+
   getImagePath = () => {
     const level = this.props.name;
     if (level === "levelEasy") return levelEasy;
@@ -72,12 +105,8 @@ export default class Tile extends Component {
     return (
       <div className="tile" onClick={this.gameSelected}>
         <h2>{this.props.heading}</h2>
-
-        <img
-          src={this.getImagePath()}
-          // src="http://bgfons.com/uploads/tile/tile_texture3062.jpg"
-          alt={this.props.name}
-        />
+        <div className="level-desc">{this.getLevelDesc()}</div>
+        <img src={this.getImagePath()} alt={this.props.name} />
       </div>
     );
   }
