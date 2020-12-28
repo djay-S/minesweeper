@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import levelHard from "../assets/levelHard.png";
 import levelEasy from "../assets/levelEasy.png";
 import levelMedium from "../assets/levelMedium.png";
-import levelCustom from "../assets/levelCustom.png";
+import levelExtreme from "../assets/levelExtreme.png";
 
 export default class Tile extends Component {
   constructor(props) {
@@ -11,7 +11,6 @@ export default class Tile extends Component {
       rows: 0,
       columns: 0,
       mines: 0,
-      customSelected: false,
     };
   }
 
@@ -34,10 +33,12 @@ export default class Tile extends Component {
     if (level === "levelHard") {
       row = 10;
       col = 9;
-      mines = 50;
+      mines = 25;
     }
-    if (level === "levelCustom") {
-      this.setState({ customSelected: true });
+    if (level === "levelExtreme") {
+      row = 10;
+      col = 10;
+      mines = 50;
     }
     this.setState(
       {
@@ -64,7 +65,7 @@ export default class Tile extends Component {
     if (level === "levelEasy") return levelEasy;
     if (level === "levelMedium") return levelMedium;
     if (level === "levelHard") return levelHard;
-    if (level === "levelCustom") return levelCustom;
+    if (level === "levelExtreme") return levelExtreme;
   };
 
   render() {

@@ -9,56 +9,7 @@ export default class Minesweeper extends Component {
     columns: 0,
     mines: 0,
     newGame: false,
-    customSelected: false,
     showModal: false,
-  };
-
-  gameSelect = (e) => {
-    let row = 0,
-      col = 0,
-      mines = 0;
-    const level = e.target.name;
-    if (level === "levelEasy") {
-      row = 5;
-      col = 5;
-      mines = 5;
-    }
-    if (level === "levelMedium") {
-      row = 10;
-      col = 7;
-      mines = 20;
-    }
-    if (level === "levelHard") {
-      row = 10;
-      col = 9;
-      mines = 50;
-    }
-    if (level === "levelCustom") {
-      this.setState({ customSelected: true });
-    }
-    this.setState({
-      rows: row,
-      columns: col,
-      mines: mines,
-    });
-  };
-
-  getCustomGridData = () => {
-    // renderCustomDataEntries()
-  };
-
-  renderCustomDataEntries = () => {
-    console.log("Custom");
-    if (this.state.customSelected) {
-      return <h2>sdfgfgd</h2>;
-    }
-    return (
-      // <div className='sdfd'>
-      // <input type='text' name='row' value='Enter Row  Value' />Roes
-      <h2>sdfg</h2>
-      // sdf
-      // </div>
-    );
   };
 
   refreshPage = () => {
@@ -99,8 +50,8 @@ export default class Minesweeper extends Component {
           handleInput={this.handleInputFromTile}
         />
         <Tile
-          heading={"Custom"}
-          name="levelCustom"
+          heading={"Extreme"}
+          name="levelExtreme"
           selected={false}
           handleInput={this.handleInputFromTile}
         />
