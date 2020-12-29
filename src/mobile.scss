@@ -1,25 +1,4 @@
-@import "./mobile.scss";
-@import "partials/keyframes";
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-:root {
-  --bckgrnd-clr: #282c34;
-  --game-info: #19a0d9;
-  --game-lost: #cb3b3b;
-  --game-won: #006400;
-  --cell-bckgrnd: #c47b46;
-  --cell-hover: #e6945a;
-  --cell-cleared-bckgrnd: #7b7b7b;
-  --cell-text: #fff;
-  --wrong-flagged: #fc543c;
-}
-
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 600px) {
   body {
     margin: 20px;
     padding: 0;
@@ -28,25 +7,29 @@
     color: lavenderblush;
   }
 
+  .board {
+    margin-top: 15%;
+  }
+
   .game {
-    max-width: 50vw;
+    max-width: 80vw;
     margin: 0 auto;
     padding: 20px;
     --startOpacity: 0;
     --endOpacity: 1;
     animation: animateOpacity 1s;
     .game-info {
-      font-size: calc(10px + (80 - 10) * ((100vw - 300px) / (4000 - 300)));
+      font-size: large;
       margin-bottom: 20px;
       background: var(--game-info);
       padding: 7px;
       text-align: center;
-      color: var(--cell-text);
+      color: #fff;
       min-height: 100px;
       border-radius: 7px;
     }
     .game_status {
-      padding: 20px;
+      padding: 5%;
     }
     .lost {
       background: var(--game-lost);
@@ -70,7 +53,7 @@
       text-align: center;
       width: 5vw;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 2px;
       color: var(--cell-text);
       font-weight: 600;
       &:focus {
